@@ -319,7 +319,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	for {
 		kv, _, err := r.ReadLine()
 		
-
 		var key string
 		i := bytes.IndexByte(kv, ':')
 		if i >= 0 {
@@ -365,6 +364,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		}
 
 		if key == "Response" && value == "Parked calls will follow" {
+			log.Print()
 			responseFollows = true
 		}
 
