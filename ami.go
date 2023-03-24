@@ -363,7 +363,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			responseFollows = true
 		}
 
-		if key == "Response" && value == "Parked calls will follow" {
+		if key == "Message" && value == "Parked calls will follow" {
 			responseFollows = true
 		}
 
