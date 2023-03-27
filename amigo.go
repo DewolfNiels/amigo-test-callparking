@@ -99,8 +99,8 @@ func (a *Amigo) Action(action map[string]string) (map[string]string, error) {
 		return e, nil
 	}
 
-	if (strings.ToLower(action["Action"]) == "logoff") {
-		a.ami.reconnect = false;
+	if strings.ToLower(action["Action"]) == "logoff" {
+		a.ami.reconnect = false
 	}
 	return result, nil
 }
