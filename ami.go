@@ -340,7 +340,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			continue
 		}
 
-		if responseFollows && key != "Privilege" && key != "ActionID" {
+		if responseFollows && key != "Privilege" {
 			if string(kv) != "--END COMMAND--" {
 				if len(m[commandResponseKey]) == 0 {
 					m[commandResponseKey] = string(kv)
