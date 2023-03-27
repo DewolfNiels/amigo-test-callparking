@@ -372,7 +372,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		if key == "Message" && value == "Parked calls will follow" {
 			log.Print("HEY WERELD")
-			responseFollows = true
+			// responseFollows = true
 		}
 
 		if key == "Output" && !outputExist {
