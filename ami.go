@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"strconv"
 	"sync"
@@ -340,7 +341,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			continue
 		}
 
-		if responseFollows && key != "Privilege" {
+		if responseFollows && key != "Privilege" && key != "ActionID" {
 			if string(kv) != "--END COMMAND--" {
 				if len(m[commandResponseKey]) == 0 {
 					m[commandResponseKey] = string(kv)
@@ -367,6 +368,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		}
 
 		if key == "Message" && value == "Parked calls will follow" {
+			log.Print("HEY WERELD")
 			responseFollows = true
 		}
 
