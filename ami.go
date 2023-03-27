@@ -319,19 +319,21 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 	for {
 		kv, _, err := r.ReadLine()
-		log.Print(kv)
 		if len(kv) == 0 {
 			return m, err
 		}
 
 		var key string
 		i := bytes.IndexByte(kv, ':')
+		log.Printf("i: ", i)
 		if i >= 0 {
 			endKey := i
+			log.Printf("endKey: ", endKey)
 			for endKey > 0 && kv[endKey-1] == ' ' {
 				endKey--
 			}
 			key = string(kv[:endKey])
+			log.Printf("key: ", key)
 		}
 
 		if key == "" && !responseFollows {
