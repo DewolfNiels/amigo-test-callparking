@@ -319,7 +319,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 	for {
 		kv, _, err := r.ReadLine()
-		if len(kv) == 0 {
+		if len(kv) == 0 && !responseFollows {
 			return m, err
 		}
 
@@ -372,7 +372,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		if key == "Message" && value == "Parked calls will follow" {
 			log.Print("HEY WERELD")
-			// responseFollows = true
+			responseFollows = true
 		}
 
 		if key == "Output" && !outputExist {
