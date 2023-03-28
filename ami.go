@@ -381,7 +381,9 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m["RealOutput"] = value
 			outputExist = true
 		} else {
-			m[fmt.Sprint(key, j)] = value
+			key = fmt.Sprint(key, j)
+			log.Printf("key is ", key)
+			m[key] = value
 		}
 
 		// log.Printf("OUTPUTEXISTS: ", outputExist)
