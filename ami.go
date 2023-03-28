@@ -335,7 +335,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			log.Printf("key: ", key)
 		}
 
-		if key == "" && !responseFollows {
+		if key == "" && responseFollows {
 			log.Print("------------CONTINUE----------------")
 			continue
 		} else if key == "" && err != nil {
