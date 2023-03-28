@@ -343,6 +343,8 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			continue
 		}
 
+		//////////////////////////// not sure if we use this, if we do the parking reading should be completely seperated
+
 		// if responseFollows && key != "Privilege" && key != "ActionID" {
 		// 	if string(kv) != "--END COMMAND--" {
 		// 		if len(m[commandResponseKey]) == 0 {
