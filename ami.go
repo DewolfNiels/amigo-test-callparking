@@ -335,12 +335,12 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			log.Printf("key: ", key)
 		}
 
-		if key == "" && responseFollows {
-			log.Print("------------CONTINUE----------------")
+		if key == "" && !responseFollows {
+			if err != nil {
+				return m, err
+			}
+
 			continue
-		} else if key == "" && err != nil {
-			log.Print("------------RETURN MAP--------------")
-			return m, err
 		}
 
 		if responseFollows && key != "Privilege" && key != "ActionID" {
