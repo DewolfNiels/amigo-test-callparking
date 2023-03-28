@@ -317,9 +317,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	var responseFollows bool
 	var outputExist = false
 
-	// current problem:
-	// * Map does not return with parkedcalls
-	// * goes out of loop when key is empty string?
 	log.Print("nieuwe map")
 	for {
 		kv, _, err := r.ReadLine()
@@ -348,13 +345,13 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			return m, err
 		}
 
-		if responseFollows && key != "Privilege" && key != "ActionID" && key != "" {
+		if responseFollows && key != "Privilege" && key != "ActionID" {
 			if string(kv) != "--END COMMAND--" {
 				if len(m[commandResponseKey]) == 0 {
-					// log.Printf("what da dog doin", string(kv))
-					// m[commandResponseKey] = string(kv)
+					// log.Printf("hi", string(kv))
+					m[commandResponseKey] = string(kv)
 				} else {
-					// log.Printf("cant have crap in ohio", fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv)))
+					// log.Printf("hello", fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv)))
 					m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
 				}
 			}
@@ -388,7 +385,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m[key] = value
 		}
 		//&& value == "ParkedCallsComplete"
-		if key == "EventList" && value == "complete" {
+		if key == "EventList" && value == "Complete" {
 			log.Printf("return great success eventlist:", value)
 			return m, err
 		}
