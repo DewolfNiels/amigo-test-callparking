@@ -318,6 +318,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	var outputExist = false
 
 	for {
+		j := 0
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
 			// log.Print("return place 1")
@@ -380,7 +381,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m["RealOutput"] = value
 			outputExist = true
 		} else {
-			m[key] = value
+			m[fmt.Sprint(key, j)] = value
 		}
 
 		// log.Printf("OUTPUTEXISTS: ", outputExist)
@@ -397,6 +398,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			return m, err
 		}
 
+		j++
 	}
 }
 
