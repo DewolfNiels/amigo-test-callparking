@@ -328,12 +328,11 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		i := bytes.IndexByte(kv, ':')
 		if i >= 0 {
 			endKey := i
-			// log.Printf("endKey: ", endKey)
 			for endKey > 0 && kv[endKey-1] == ' ' {
 				endKey--
 			}
 			key = string(kv[:endKey])
-			// log.Printf("key: ", key)
+			log.Printf("key: ", key)
 		}
 
 		if key == "" && responseFollows {
@@ -385,7 +384,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		}
 
 		log.Printf("debug", key, value)
-		log.Printf("debug MMMMM", m[key], m[value])
 
 		if key == "Event" && value == "ParkedCallsComplete" {
 			log.Printf("return great success eventlist:", value)
