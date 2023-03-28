@@ -322,7 +322,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	for {
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
-			// log.Print("return place 1")
 			return m, err
 		}
 
@@ -334,7 +333,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 				endKey--
 			}
 			key = string(kv[:endKey])
-			// log.Printf("key: ", key)
 		}
 
 		if key == "" && !responseFollows {
@@ -397,12 +395,9 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		}
 
-		// log.Printf("OUTPUTEXISTS: ", outputExist)
-
-		// log.Printf("debug", key, value)
-
-		eventKey := fmt.Sprint("Event", j)
-		if key == eventKey && value == "ParkedCallsComplete" {
+		// && value == "ParkedCallsComplete"
+		eventKey := fmt.Sprint("Total", j)
+		if key == eventKey {
 			log.Printf("return great success eventlist:", value)
 			return m, err
 		}
