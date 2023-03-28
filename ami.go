@@ -317,6 +317,10 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	var responseFollows bool
 	var outputExist = false
 
+	// current problem:
+	// * Map does not return with parkedcalls
+	// * goes out of loop when key is empty string?
+	log.Print("nieuwe map")
 	for {
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
