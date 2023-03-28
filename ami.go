@@ -346,8 +346,10 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		if responseFollows && key != "Privilege" && key != "ActionID" && key != "" {
 			if string(kv) != "--END COMMAND--" {
 				if len(m[commandResponseKey]) == 0 {
+					log.Printf("what da dog doin", string(kv))
 					m[commandResponseKey] = string(kv)
 				} else {
+					log.Printf("cant have crap in ohio", fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv)))
 					m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
 				}
 			}
