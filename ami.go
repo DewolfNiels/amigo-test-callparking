@@ -317,9 +317,9 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	var responseFollows bool
 	var outputExist = false
 	var readParkingLot = false
+	j := 0
 
 	for {
-		j := 0
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
 			// log.Print("return place 1")
