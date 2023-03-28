@@ -317,7 +317,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	var responseFollows bool
 	var outputExist = false
 
-	log.Print("nieuwe map")
 	for {
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
@@ -395,7 +394,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			return m, err
 		}
 
-		log.Print(m)
+		// log.Print(m)
 	}
 }
 
