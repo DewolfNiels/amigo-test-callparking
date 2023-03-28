@@ -380,7 +380,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m["RealOutput"] = value
 			outputExist = true
 		} else {
-			log.Print("-----adding-value-to-key-----")
 			m[key] = value
 		}
 
