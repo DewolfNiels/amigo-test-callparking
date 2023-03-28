@@ -389,7 +389,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 				}
 				if key != "" {
 					key = fmt.Sprint(key, j)
-					log.Printf("key is ", key)
 					m[key] = value
 				}
 			} else {
@@ -402,8 +401,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		// log.Printf("debug", key, value)
 
-		eventKey := fmt.Sprint(key, j)
-		log.Printf("eventkey/key", eventKey, key)
+		eventKey := fmt.Sprint("Event", j)
 		if key == eventKey && value == "ParkedCallsComplete" {
 			log.Printf("return great success eventlist:", value)
 			return m, err
