@@ -323,7 +323,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			return m, err
 		}
 
-		// lezen lukt, maar toevoegen aan map stopt
 		var key string
 		i := bytes.IndexByte(kv, ':')
 		if i >= 0 {
@@ -381,7 +380,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m[key] = value
 		}
 		//&& value == "ParkedCallsComplete"
-		if key == "EventList" {
+		if key == "EventList" && value == "Complete" {
 			log.Printf("return great success eventlist:", value)
 			return m, err
 		}
