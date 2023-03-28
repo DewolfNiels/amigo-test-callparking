@@ -316,6 +316,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	m = make(map[string]string)
 	var responseFollows bool
 	var outputExist = false
+	var readParkingLot = false
 
 	for {
 		j := 0
@@ -374,6 +375,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		}
 
 		if key == "Message" && value == "Parked calls will follow" {
+			readParkingLot = true
 			responseFollows = true
 		}
 
@@ -381,9 +383,14 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m["RealOutput"] = value
 			outputExist = true
 		} else {
-			key = fmt.Sprint(key, j)
-			log.Printf("key is ", key)
-			m[key] = value
+			if readParkingLot {
+				key = fmt.Sprint(key, j)
+				log.Printf("key is ", key)
+				m[key] = value
+			} else {
+				m[key] = value
+			}
+
 		}
 
 		// log.Printf("OUTPUTEXISTS: ", outputExist)
