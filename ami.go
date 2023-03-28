@@ -346,10 +346,9 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		if responseFollows && key != "Privilege" && key != "ActionID" {
 			if string(kv) != "--END COMMAND--" {
-				if len(m[commandResponseKey]) <= 0 {
+				if len(m[commandResponseKey]) == 0 {
 					m[commandResponseKey] = string(kv)
 				} else {
-					log.Print("breadcrumb 1")
 					m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
 				}
 			}
@@ -363,7 +362,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		i++
 		for i < len(kv) && (kv[i] == ' ' || kv[i] == '\t') {
-			log.Printf("breadcrumb 2", kv[i])
 			i++
 		}
 		value := string(kv[i:])
@@ -383,8 +381,8 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			m[key] = value
 		}
 		//&& value == "ParkedCallsComplete"
-		if key == "Event" {
-			log.Printf("return great success event:", value)
+		if key == "EventList" {
+			log.Printf("return great success eventlist:", value)
 			return m, err
 		}
 
