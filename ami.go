@@ -343,24 +343,24 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			continue
 		}
 
-		if responseFollows && key != "Privilege" && key != "ActionID" {
-			if string(kv) != "--END COMMAND--" {
-				if len(m[commandResponseKey]) == 0 && string(kv) != "" {
-					log.Printf("setting commandResponseKey", string(kv))
-					m[commandResponseKey] = string(kv)
-				} else {
-					log.Printf("setting value for key")
-					m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
-				}
-			}
+		// if responseFollows && key != "Privilege" && key != "ActionID" {
+		// 	if string(kv) != "--END COMMAND--" {
+		// 		if len(m[commandResponseKey]) == 0 {
+		// 			log.Printf("setting commandResponseKey", string(kv))
+		// 			m[commandResponseKey] = string(kv)
+		// 		} else {
+		// 			log.Printf("setting value for key")
+		// 			m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
+		// 		}
+		// 	}
 
-			if err != nil {
-				log.Print("return place 1")
-				return m, err
-			}
+		// 	if err != nil {
+		// 		log.Print("return place 1")
+		// 		return m, err
+		// 	}
 
-			continue
-		}
+		// 	continue
+		// }
 
 		i++
 		for i < len(kv) && (kv[i] == ' ' || kv[i] == '\t') {
