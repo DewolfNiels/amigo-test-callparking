@@ -320,6 +320,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 	for {
 		kv, _, err := r.ReadLine()
 		if len(kv) == 0 && !responseFollows {
+			log.Print("return place 1")
 			return m, err
 		}
 
@@ -355,6 +356,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			}
 
 			if err != nil {
+				log.Print("return place 1")
 				return m, err
 			}
 
