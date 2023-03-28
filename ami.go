@@ -383,8 +383,11 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		} else {
 			m[key] = value
 		}
-		//&& value == "ParkedCallsComplete"
-		if key == "EventList" && value == "Complete" {
+
+		log.Printf("debug", key, value)
+		log.Printf("debug MMMMM", m[key], m[value])
+
+		if key == "Event" && value == "ParkedCallsComplete" {
 			log.Printf("return great success eventlist:", value)
 			return m, err
 		}
