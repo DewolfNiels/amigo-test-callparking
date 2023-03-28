@@ -387,9 +387,11 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 				if key == "Event" {
 					j++
 				}
-				key = fmt.Sprint(key, j)
-				log.Printf("key is ", key)
-				m[key] = value
+				if key != "" {
+					key = fmt.Sprint(key, j)
+					log.Printf("key is ", key)
+					m[key] = value
+				}
 			} else {
 				m[key] = value
 			}
