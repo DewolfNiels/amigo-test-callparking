@@ -367,6 +367,10 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			continue
 		}
 
+		if responseFollows && key == "" {
+			i--
+		}
+
 		i++
 		for i < len(kv) && (kv[i] == ' ' || kv[i] == '\t') {
 			i++
