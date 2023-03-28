@@ -384,7 +384,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 			outputExist = true
 		} else {
 			if readParkingLot {
-				if key == fmt.Sprint("Event", j) {
+				if key == "Event" {
 					j++
 				}
 				key = fmt.Sprint(key, j)
