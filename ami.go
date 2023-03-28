@@ -326,7 +326,6 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		var key string
 		i := bytes.IndexByte(kv, ':')
-		log.Printf("kv + byte", kv, i)
 		if i >= 0 {
 			endKey := i
 			for endKey > 0 && kv[endKey-1] == ' ' {
