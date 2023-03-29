@@ -320,7 +320,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 	for {
 		kv, _, err := r.ReadLine()
-		if len(kv) == 0 && !responseFollows {
+		if len(kv) == 0 {
 			return m, err
 		}
 
