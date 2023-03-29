@@ -400,8 +400,7 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		}
 
-		eventKey := fmt.Sprint("Total", j)
-		if key == eventKey && readParkingLot {
+		if key == "Total" && readParkingLot {
 			return m, err
 		}
 
