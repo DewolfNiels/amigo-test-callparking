@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"log"
 	"net"
 	"strconv"
 	"sync"
@@ -344,25 +343,25 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 		}
 
 		//////////////////////////// not sure if we use this, if we do the parking reading should be completely seperated
+		/// could be achieved by a simple if statement
 
-		// if responseFollows && key != "Privilege" && key != "ActionID" {
-		// 	if string(kv) != "--END COMMAND--" {
-		// 		if len(m[commandResponseKey]) == 0 {
-		// 			log.Printf("setting commandResponseKey", string(kv))
-		// 			m[commandResponseKey] = string(kv)
-		// 		} else {
-		// 			log.Printf("setting value for key")
-		// 			m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
-		// 		}
-		// 	}
+		if !readParkingLot {
+			if responseFollows && key != "Privilege" && key != "ActionID" {
+				if string(kv) != "--END COMMAND--" {
+					if len(m[commandResponseKey]) == 0 {
+						m[commandResponseKey] = string(kv)
+					} else {
+						m[commandResponseKey] = fmt.Sprintf("%s\n%s", m[commandResponseKey], string(kv))
+					}
+				}
 
-		// 	if err != nil {
-		// 		log.Print("return place 1")
-		// 		return m, err
-		// 	}
+				if err != nil {
+					return m, err
+				}
 
-		// 	continue
-		// }
+				continue
+			}
+		}
 
 		i++
 		for i < len(kv) && (kv[i] == ' ' || kv[i] == '\t') {
@@ -397,15 +396,12 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 
 		}
 
-		// && value == "ParkedCallsComplete"
 		eventKey := fmt.Sprint("Total", j)
-		if key == eventKey {
-			log.Printf("return great success eventlist:", value)
+		if key == eventKey && readParkingLot {
 			return m, err
 		}
 
 		if err != nil {
-			log.Printf("return error, map:", m)
 			return m, err
 		}
 
