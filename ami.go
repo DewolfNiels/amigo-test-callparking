@@ -387,8 +387,12 @@ func readMessage(r *bufio.Reader) (m map[string]string, err error) {
 					j++
 				}
 				if key != "" {
-					key = fmt.Sprint(key, j)
-					m[key] = value
+					if key == "Total" {
+						m[key] = value
+					} else {
+						key = fmt.Sprint(key, j)
+						m[key] = value
+					}
 				}
 			} else {
 				m[key] = value
